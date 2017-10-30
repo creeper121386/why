@@ -8,10 +8,10 @@ int main(int argc,char *argv[])
     char a[500]={"0"};
     char fname[50];
     char encrypt[500]={0},decode[500]={0};
-    sscanf(argv[3],"%d",&passwd);
+    sscanf(argv[2],"%d",&passwd);
     //声明变量及数组,将命令行参数的第三个参数转化为int类型供加密/解密使用
 
-    FILE *fpRead=fopen(argv[4],"r");
+    FILE *fpRead=fopen(argv[3],"r");
     if(fpRead==NULL)
     {
     printf("error\n");
@@ -35,9 +35,9 @@ int main(int argc,char *argv[])
     printf("\nencrypted/decrypted code is %s\n",encrypt);
 
 
-    if(argv[2]=="-e")
+    if(argv[1]=="-e")
         strcpy(fname,"encrypted.txt");
-    if(argv[2]=="-d")
+    if(argv[1]=="-d")
         strcpy(fname,"letter.txt");
     //若执行加密操作，则创建encrypted.txt，若执行解密操作则创建letter.txt，用于存放结果
 
