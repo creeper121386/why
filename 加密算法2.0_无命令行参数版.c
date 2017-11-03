@@ -9,14 +9,14 @@ int main()
     char fname1[50];
     char fname2[50];
     char encrypt[500]={0},decode[500]={0};
-    //ÉùÃ÷±äÁ¿¼°Êı×é
+    //å£°æ˜å˜é‡åŠæ•°ç»„
 
     printf("enter the name of the file to encrypt or decrypt:\n");
     scanf("%s",fname1);
-    //ÊäÈëÏëÒª½øĞĞ¼ÓÃÜ/½âÃÜ²Ù×÷µÄÎÄ¼şÃû
+    //è¾“å…¥æƒ³è¦è¿›è¡ŒåŠ å¯†/è§£å¯†æ“ä½œçš„æ–‡ä»¶å
     printf("enter the password:\n");
     scanf("%d",&password);
-    //ÊäÈëÃÜÂë
+    //è¾“å…¥å¯†ç 
 
     FILE *fpRead=fopen(fname1,"r");
     if(fpRead==NULL)
@@ -24,37 +24,35 @@ int main()
     printf("error\n");
     exit(1);
     }
-    //Èç¹ûÎÄ¼ş´ò¿ªÊ§°Ü£¬´òÓ¡¡°error¡±
+    //å¦‚æœæ–‡ä»¶æ‰“å¼€å¤±è´¥ï¼Œæ‰“å°â€œerrorâ€
 
     for(k=0;k<500;k++)
     {
-        fscanf(fpRead,"%s",&a[k]);
+        fgets(a,sizeof(a),fpRead);
     }
-    //¶ÁÈ¡ÎÄ¼ş²¢´¢´æÔÚÊı×éaÖĞ
+    //è¯»å–æ–‡ä»¶å¹¶å‚¨å­˜åœ¨æ•°ç»„aä¸­
 
     for(i=0;i<strlen(a);i++)
     {
        encrypt[i]=a[i]^password;
     }
-    //½«ÎÄ¼şÄÚÈİ°´Î»Òì»ò¼ÓÃÜ/½âÃÜ£¬²¢½«¼ÓÃÜ/½âÃÜºóµÄÄÚÈİ´¢´æÔÚÊı×éencryptÖĞ
-
+    //å°†æ–‡ä»¶å†…å®¹æŒ‰ä½å¼‚æˆ–åŠ å¯†/è§£å¯†ï¼Œå¹¶å°†åŠ å¯†/è§£å¯†åçš„å†…å®¹å‚¨å­˜åœ¨æ•°ç»„encryptä¸­
+    a[i]='\0';
     printf("\noriginal code is %s\n",a);
     printf("\nencrypted/decrypted code is %s\n",encrypt);
 
     printf("enter the name of a new file to store the result:\n");
     scanf("%s",fname2);
-    //Éú³ÉÒ»¸öĞÂµÄÎÄ¼ş´æ´¢¼ÓÃÜ/½âÃÜ½á¹û£¬ÊäÈë¸ÃÎÄ¼şµÄÃû×Ö
+    //ç”Ÿæˆä¸€ä¸ªæ–°çš„æ–‡ä»¶å­˜å‚¨åŠ å¯†/è§£å¯†ç»“æœï¼Œè¾“å…¥è¯¥æ–‡ä»¶çš„åå­—
 
     FILE *pf1=fopen(fname2,"w+");
-    for(m=0;m<500;m++)
-    {
-        putc(encrypt[m],pf1);
-    }
+
+    fputs(encrypt,pf1);
     fclose(pf1);
     fflush(pf1);
-    //´´½¨ĞÂÎÄ¼ş£¬²¢½«Êı×éencryptĞ´Èë¸ÃÎÄ¼ş
+    //åˆ›å»ºæ–°æ–‡ä»¶ï¼Œå¹¶å°†æ•°ç»„encryptå†™å…¥è¯¥æ–‡ä»¶
 
     printf("the result has been written into %s.txt\n",fname2);
     return 0;
-    //½áÊø
+    //ç»“æŸ
 }
